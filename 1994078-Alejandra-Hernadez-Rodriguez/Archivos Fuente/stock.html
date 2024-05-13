@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Stock</title>
+    <link rel="stylesheet" href="stock1.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu-container">
+            <h1>Inventario</h1>
+            <nav>
+                <ul>
+                    <li><a href="menu.html">Inicio</a></li>
+                    <li><a href="stock.html">Inventario</a></li>
+                    <li><a href="pedidos.html">Realizar pedidos</a></li>
+                    <li><a href="pedidos.html">Pedidos Realizados</a></li>
+                    <li><a href="agregar.html">Agregar Nuevos Productos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="tablaProductos"></div>
+
+    <script>
+        // Función para cargar la tabla de productos mediante AJAX
+        async function cargarTablaProductos() {
+            try {
+                const response = await fetch("inventario.php");
+                if (!response.ok) {
+                    throw new Error('Error al cargar datos del servidor');
+                }
+                const tablaProductosHTML = await response.text();
+                document.getElementById("tablaProductos").innerHTML = tablaProductosHTML;
+            } catch (error) {
+                console.error('Error al cargar tabla de productos:', error);
+            }
+        }
+
+        // Función para editar un producto
+        function editarProducto(nombre) {
+            // Simular carga de datos del producto desde el servidor
+            const producto = {
+                nombre: nombre, // Podrías enviar el nombre del producto para cargar sus datos
+                cantidad: 10, // Ejemplo de cantidad (simulado)
+                imagen: 'imagen.jpg' // Ejemplo de imagen (simulado)
+            };
+
+            // Crear un formulario de edición dentro del contenedor tablaProductos
+            const formHTML = `
+                <div class="container">
+                    <div class="form-container" style="
+                        background-color: #fff;
+                        padding: 40px;
+                        border-radius: 10px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        text-align: center;
+                        max-width: 400px;
+                        width: 100%;
+                        margin-top: 20px; /* Ajusta el margen superior según tu diseño */
+                    ">
+                        <h1>Editar Producto</h1>
+                        <form onsubmit="guardarEdicion(event, '${producto.nombre}')">
+                            <div class="input-container">
+                                <label for="nombre">Nombre del Producto</label>
+                                <input type="text" id="nombre" name="nombre" value="${producto.nombre}" required>
+                            </div>
+                            <div class="input-container">
+                                <label for="cantidad">Cantidad en Stock</label>
+                                <input type="number" id="cantidad" name="cantidad" value="${producto.cantidad}" min="0" required>
+                            </div>
+                            <div class="input-container">
+                                <label for="imagen">Imagen del Producto</label>
+                                <input type="file" id="imagen" name="imagen" accept="image/*">
+                                <img src="${producto.imagen}" alt="Imagen del Producto">
+                            </div>
+                            <button type="submit">Guardar Cambios</button>
+                            <button type="button" onclick="eliminarProducto('${producto.nombre}')">Eliminar Producto</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('tablaProductos').innerHTML = formHTML;
+        }
+
+        // Función para guardar los cambios de edición
+        async function guardarEdicion(event, nombre) {
+            event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            try {
+                // Aquí podrías enviar una solicitud AJAX para guardar los cambios del producto en el servidor
+                alert("Guardando cambios para el producto: " + nombre);
+
+                // Simulación de éxito en la operación de guardado
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simular una demora de 1 segundo
+
+                // Después de guardar los cambios, cargar la tabla nuevamente
+                await cargarTablaProductos();
+            } catch (error) {
+                console.error('Error al guardar cambios:', error);
+            }
+        }
+
+        // Función para eliminar un producto
+        async function eliminarProducto(nombre) {
+            if (confirm("¿Estás seguro de eliminar el producto '" + nombre + "'?")) {
+                try {
+                    // Aquí podrías enviar una solicitud AJAX para eliminar el producto en el servidor
+                    alert("Eliminando el producto: " + nombre);
+
+                    // Simulación de éxito en la operación de eliminación
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // Simular una demora de 1 segundo
+
+                    // Después de eliminar, cargar la tabla nuevamente
+                    await cargarTablaProductos();
+                } catch (error) {
+                    console.error('Error al eliminar producto:', error);
+                }
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        window.onload = cargarTablaProductos;
+    </script>
+</body>
+</html>
+

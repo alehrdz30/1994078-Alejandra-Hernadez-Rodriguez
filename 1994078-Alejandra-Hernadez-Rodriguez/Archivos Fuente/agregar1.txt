@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar pedidos</title>
+    <link rel="stylesheet" href="pedidos.css">
+</head>
+<body>
+
+<div class="container">
+        <div class="menu-container">
+            <h1> Realizar Pedidos</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="menu.html">Inicio</a></li>
+                    <li><a href="stock.html">Inventario</a></li>
+                    <li><a href="pedidos.html"> Realizar Pedidos</a></li>
+					<li><a href="pedidosrealizados.html"> Pedidos realizados</a></li>
+                    <li><a href="agregar.html">Agregar Nuevos Productos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+	
+    <div class="container">
+        <div class="form-container">
+            <h1>Realizar Pedido</h1>
+            <form action="pedidos.php" method="post">
+                <div class="input-container">
+                    <label for="producto">Producto</label>
+                    <select id="producto" name="producto" required>
+                        <option value="">Seleccionar producto</option>
+                        <option value="funko_spiderman">Funko Spider-Man</option>
+                        <option value="funko_batman">Funko Batman</option>
+                        <option value="funko_Darth Vader">Funko Darth Vader</option>
+                        <option value="funko_Ant Man">Funko Ant Man</option>
+                        <option value="funko_Boba Fett">Funko Boba Fett</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                </div>
+                <div class="input-container">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required>
+                </div>
+                <button type="submit">Realizar Pedido</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

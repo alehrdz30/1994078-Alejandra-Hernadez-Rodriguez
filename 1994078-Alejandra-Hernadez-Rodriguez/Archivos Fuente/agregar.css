@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #788199;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin-top: -1500px;
+}
+
+.form-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-container select,
+.input-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.menu-container {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.menu-container h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.menu-container nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+
+.menu-container nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu-container nav ul li:last-child {
+    margin-right: 0;
+}
+
+.menu-container nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}

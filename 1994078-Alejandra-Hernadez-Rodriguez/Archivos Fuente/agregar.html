@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="agregar.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu-container">
+            <h1>Gestión de Inventario</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="menu.html">Inicio</a></li>
+                    <li><a href="stock.html">Inventario</a></li>
+                    <li><a href="pedidos.html">Agregar Pedidos</a></li>
+					<li><a href="pedidosrealizados.html">Pedidos Realizados</a></li>
+                    <li><a href="agregar.html">Agregar Nuevos Productos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Agregar Nuevo Producto</h1>
+            <div id="mensaje" class="mensaje"></div>
+            
+            <form id="agregarForm" enctype="multipart/form-data">
+                <div class="input-container">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="input-container">
+                    <label for="cantidad">Cantidad en Stock</label>
+                    <input type="number" id="cantidad" name="cantidad" min="0" required>
+                </div>
+                <div class="input-container">
+                    <label for="imagen">Imagen del Producto</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                </div>
+                <button type="button" onclick="agregarProducto()">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function agregarProducto() {
+            const form = document.getElementById('agregarForm');
+            const formData = new FormData(form);
+
+            // Enviar los datos al servidor usando AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'agregar.php', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Mostrar mensaje de éxito
+                    const mensajeElement = document.getElementById('mensaje');
+                    mensajeElement.textContent = "Producto agregado correctamente";
+                    mensajeElement.classList.add('mensaje-exito');
+
+                    // Limpiar el formulario después de agregar el producto
+                    form.reset();
+                } else {
+                    // Mostrar mensaje de error
+                    const mensajeElement = document.getElementById('mensaje');
+                    mensajeElement.textContent = "Error al agregar el producto";
+                    mensajeElement.classList.add('mensaje-error');
+                }
+            };
+
+            // Enviar el formulario
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>
